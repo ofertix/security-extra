@@ -18,7 +18,7 @@ class UserParamConverter implements ParamConverterInterface
         $this->securityContext = $securityContext;
     }
 
-    public function apply(Request $request, ConfigurationInterface $configuration)
+    public function apply(Request $request, ParamConverter $configuration)
     {
         /** @var $configuration ParamConverter */
         $user = $this->securityContext->getToken()->getUser();
@@ -29,8 +29,8 @@ class UserParamConverter implements ParamConverterInterface
         }
     }
 
-    public function supports(ConfigurationInterface $configuration)
+    public function supports(ParamConverter $configuration)
     {
-        return $configuration instanceof ParamConverter && $configuration->getName() === 'user';
+        return $configuration->getName() === 'user';
     }
 }
